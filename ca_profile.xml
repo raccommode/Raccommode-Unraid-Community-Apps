@@ -2,6 +2,6 @@
   <Profile>
     Raccommode-maintained Unraid Community Apps metadata repository. This repository hosts Community Applications templates and plugin wrapper XML files as they are added.
   </Profile>
-  <Icon>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/icon.svg</Icon>
+  <Icon>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/icon.jpg</Icon>
   <WebPage>https://github.com/raccommode/Raccommode-Unraid-Community-Apps</WebPage>
 </CommunityApplications>

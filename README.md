@@ -5,7 +5,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 ## Repository Layout
 
 - `ca_profile.xml`: repository overview and support metadata shown in Community Apps.
-- `icon.svg`: repository icon referenced by `ca_profile.xml`.
+- `icon.jpg`: repository icon referenced by `ca_profile.xml`.
 - `templates/`: one active `.xml` file per Docker application.
 - `plugins/`: one active `.xml` wrapper per plugin.
 

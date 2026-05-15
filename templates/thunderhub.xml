@@ -1,0 +1,51 @@
+<Container version="2">
+  <Name>ThunderHub</Name>
+  <Repository>apotdevin/thunderhub:latest</Repository>
+  <Registry>https://hub.docker.com/r/apotdevin/thunderhub</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:3000]</WebUI>
+  <Overview>ThunderHub is an open-source Lightning Network node manager with a browser interface for monitoring and managing LND or Lightning Terminal nodes, channels, payments, on-chain wallet activity, Taproot Assets, swaps, and multi-node accounts.</Overview>
+  <Support>https://github.com/apotdevin/thunderhub/issues</Support>
+  <Project>https://github.com/apotdevin/thunderhub</Project>
+  <ReadMe>https://docs.thunderhub.io/</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/thunderhub.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/apotdevin/thunderhub-docs/main/public/favicon.ico</Icon>
+  <Category>Network:Management Tools:Utilities</Category>
+  <Requires>ThunderHub needs access to your LND or LiTD gRPC endpoint and credentials. By default this template stores account config in /data/thubConfig.yaml; edit that file under the Data path or configure the SSO variables. The Docker image runs as a non-root user, so mounted config, macaroon, and certificate files must be readable by the container.</Requires>
+  <License>MIT License</License>
+  <Screenshot>https://raw.githubusercontent.com/apotdevin/thunderhub-docs/main/public/assets/index_home.png</Screenshot>
+  <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp" Description="Web interface port. Container port: 3000." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/thunderhub" Mode="rw" Description="Stores ThunderHub account config, optional cookie, and optional SQLite database files." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/thunderhub</Config>
+  <Config Name="Host" Target="HOST" Default="0.0.0.0" Mode="" Description="Interface ThunderHub listens on inside the container." Type="Variable" Display="advanced" Required="false" Mask="false">0.0.0.0</Config>
+  <Config Name="Account Config Path" Target="ACCOUNT_CONFIG_PATH" Default="/data/thubConfig.yaml" Mode="" Description="Path to the ThunderHub YAML account config inside the container. ThunderHub can create this file if the Data path is writable." Type="Variable" Display="always" Required="false" Mask="false">/data/thubConfig.yaml</Config>
+  <Config Name="Master Password Override" Target="MASTER_PASSWORD_OVERRIDE" Default="" Mode="" Description="Optional password override used for all YAML accounts." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Log Level" Target="LOG_LEVEL" Default="info" Mode="" Description="Logging level, for example error, warn, info, debug, or verbose." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+  <Config Name="Theme" Target="THEME" Default="dark" Mode="" Description="Default interface theme. Use dark or light." Type="Variable" Display="advanced" Required="false" Mask="false">dark</Config>
+  <Config Name="Currency" Target="CURRENCY" Default="sat" Mode="" Description="Default currency display, for example sat, btc, or usd." Type="Variable" Display="advanced" Required="false" Mask="false">sat</Config>
+  <Config Name="Mempool URL" Target="MEMPOOL_URL" Default="https://mempool.space" Mode="" Description="Mempool API base URL used for fee and block data." Type="Variable" Display="advanced" Required="false" Mask="false">https://mempool.space</Config>
+  <Config Name="Tor Proxy" Target="TOR_PROXY_SERVER" Default="" Mode="" Description="Optional SOCKS proxy used for outbound connections, for example socks://127.0.0.1:9050." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Fetch Prices" Target="FETCH_PRICES" Default="true" Mode="" Description="Fetch exchange price data. Set to false to disable." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Fetch Fees" Target="FETCH_FEES" Default="true" Mode="" Description="Fetch fee recommendation data. Set to false to disable." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Disable External Links" Target="DISABLE_LINKS" Default="false" Mode="" Description="Disable external links in the interface. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable Version Check" Target="NO_VERSION_CHECK" Default="false" Mode="" Description="Disable checks against the latest GitHub release. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable All Subscriptions" Target="DISABLE_ALL_SUBS" Default="false" Mode="" Description="Disable all Lightning realtime subscriptions. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="LND Data" Target="/lnd" Default="" Mode="ro" Description="Optional read-only mount for an LND data directory. YAML accounts can use lndDir: /lnd." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="LiTD Data" Target="/lit" Default="" Mode="ro" Description="Optional read-only mount for a Lightning Terminal data directory. YAML accounts can use litDir: /lit." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SSO Server URL" Target="SSO_SERVER_URL" Default="" Mode="" Description="Optional SSO node gRPC address, for example 192.168.1.10:10009 or lnd:10009." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SSO Certificate Path" Target="SSO_CERT_PATH" Default="" Mode="" Description="Optional SSO TLS certificate path inside the container, for example /lnd/tls.cert." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SSO Macaroon Directory" Target="SSO_MACAROON_PATH" Default="" Mode="" Description="Optional directory containing admin.macaroon for SSO, for example /lnd/data/chain/bitcoin/mainnet." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SSO Node Type" Target="SSO_NODE_TYPE" Default="lnd" Mode="" Description="SSO node type. Use lnd or litd." Type="Variable" Display="advanced" Required="false" Mask="false">lnd</Config>
+  <Config Name="Dangerous No SSO Auth" Target="DANGEROUS_NO_SSO_AUTH" Default="false" Mode="" Description="Allow SSO without auth. Only use behind trusted access controls. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Cookie Path" Target="COOKIE_PATH" Default="/data/.cookie" Mode="" Description="Optional persistent cookie secret path. Keep this in the Data path if enabled." Type="Variable" Display="advanced" Required="false" Mask="true">/data/.cookie</Config>
+  <Config Name="YAML Env 1" Target="YML_ENV_1" Default="" Mode="" Description="Optional value that can be referenced from thubConfig.yaml as {YML_ENV_1}." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="YAML Env 2" Target="YML_ENV_2" Default="" Mode="" Description="Optional value that can be referenced from thubConfig.yaml as {YML_ENV_2}." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="YAML Env 3" Target="YML_ENV_3" Default="" Mode="" Description="Optional secret value that can be referenced from thubConfig.yaml as {YML_ENV_3}." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="YAML Env 4" Target="YML_ENV_4" Default="" Mode="" Description="Optional value that can be referenced from thubConfig.yaml as {YML_ENV_4}." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Database Type" Target="DB_TYPE" Default="" Mode="" Description="Optional database backend. Leave blank to disable, or use sqlite or postgres." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SQLite Database Path" Target="DB_SQLITE_PATH" Default="/data/thunderhub.db" Mode="" Description="SQLite database path used when Database Type is sqlite." Type="Variable" Display="advanced" Required="false" Mask="false">/data/thunderhub.db</Config>
+  <Config Name="Postgres URL" Target="DB_POSTGRES_URL" Default="" Mode="" Description="Postgres connection URL used when Database Type is postgres." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Database Encryption Key" Target="DB_ENCRYPTION_KEY" Default="" Mode="" Description="Optional 64-character hex key for encrypting node credentials at rest." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+</Container>

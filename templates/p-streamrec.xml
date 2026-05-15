@@ -1,0 +1,38 @@
+<Container version="2">
+  <Name>P-StreamRec</Name>
+  <Repository>ghcr.io/raccommode/p-streamrec:latest</Repository>
+  <Registry>https://github.com/raccommode/P-StreamRec/pkgs/container/p-streamrec</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:8080]</WebUI>
+  <Overview>P-StreamRec is a self-hosted recorder for Chaturbate, CAM4, and m3u8/HLS live streams, with a web interface for discovery, following, live watch, recordings, password protection, optional account login, recording segmentation, and automatic MP4 conversion.</Overview>
+  <Support>https://github.com/raccommode/P-StreamRec/issues</Support>
+  <Project>https://github.com/raccommode/P-StreamRec</Project>
+  <ReadMe>https://raw.githubusercontent.com/raccommode/P-StreamRec/main/README.md</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/p-streamrec.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/raccommode/P-StreamRec/main/p-streamrec-store-p-streamrec/icon.svg</Icon>
+  <Category>MediaApp:Video Tools:Utilities</Category>
+  <Requires>For the best Chaturbate support, install FlareSolverr separately and set FLARESOLVERR_URL. If both containers are on a custom Docker network, http://flaresolverr:8191 is expected; on bridge networking, use the Unraid server IP and FlareSolverr port.</Requires>
+  <License>Non-Commercial Open Source License</License>
+  <Screenshot>https://raw.githubusercontent.com/raccommode/P-StreamRec/main/discover.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/raccommode/P-StreamRec/main/following.png</Screenshot>
+  <Screenshot>https://raw.githubusercontent.com/raccommode/P-StreamRec/main/recordings.png</Screenshot>
+  <Config Name="Web UI Port" Target="8080" Default="8080" Mode="tcp" Description="Web interface port. Container port: 8080." Type="Port" Display="always" Required="true" Mask="false">8080</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/p-streamrec" Mode="rw" Description="Stores the database, sessions, thumbnails, cookies, original TS recordings, and converted MP4 files." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/p-streamrec</Config>
+  <Config Name="Timezone" Target="TZ" Default="UTC" Mode="" Description="Timezone used by the app, for example America/Toronto." Type="Variable" Display="always" Required="false" Mask="false">UTC</Config>
+  <Config Name="Password" Target="PASSWORD" Default="" Mode="" Description="Optional password required to access the web interface." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="Auto Record Users" Target="AUTO_RECORD_USERS" Default="" Mode="" Description="Optional comma-separated usernames to monitor and record automatically." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Chaturbate Resolver" Target="CB_RESOLVER_ENABLED" Default="true" Mode="" Description="Enable Chaturbate stream resolution. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="FlareSolverr URL" Target="FLARESOLVERR_URL" Default="http://flaresolverr:8191" Mode="" Description="Optional FlareSolverr URL for Cloudflare bypass. Install FlareSolverr separately if needed." Type="Variable" Display="advanced" Required="false" Mask="false">http://flaresolverr:8191</Config>
+  <Config Name="Chaturbate Username" Target="CHATURBATE_USERNAME" Default="" Mode="" Description="Optional Chaturbate username for Following sync and better stream quality." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Chaturbate Password" Target="CHATURBATE_PASSWORD" Default="" Mode="" Description="Optional Chaturbate password." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Recording Segment Duration" Target="RECORD_SEGMENT_DURATION_MINUTES" Default="0" Mode="" Description="Optional split interval in minutes. Use 0, 30, 60, or 90." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Recording Segment Size" Target="RECORD_SEGMENT_SIZE_MB" Default="0" Mode="" Description="Optional maximum TS segment size in MB. Use 0 to disable size-based splitting." Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Auto Convert" Target="AUTO_CONVERT" Default="true" Mode="" Description="Automatically convert completed TS recordings to MP4. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Keep TS Originals" Target="KEEP_TS" Default="false" Mode="" Description="Keep original TS files after MP4 conversion. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Provider Proxy URL" Target="PSTREAMREC_PROXY_URL" Default="" Mode="" Description="Optional outbound proxy for provider requests, such as http, https, socks4, or socks5." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="No Proxy" Target="NO_PROXY" Default="localhost,127.0.0.1,flaresolverr" Mode="" Description="Hosts that should bypass standard proxy environment variables." Type="Variable" Display="advanced" Required="false" Mask="false">localhost,127.0.0.1,flaresolverr</Config>
+  <Config Name="Chaturbate Request Delay" Target="CB_REQUEST_DELAY" Default="1.0" Mode="" Description="Delay between Chaturbate requests, in seconds." Type="Variable" Display="advanced" Required="false" Mask="false">1.0</Config>
+</Container>

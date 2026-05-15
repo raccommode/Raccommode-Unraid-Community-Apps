@@ -6,12 +6,12 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 
 - `ca_profile.xml`: repository overview and support metadata shown in Community Apps.
 - `icon.jpg`: repository icon referenced by `ca_profile.xml`.
-- `templates/`: one active `.xml` file per Docker application.
-- `plugins/`: one active `.xml` wrapper per plugin.
+- `templates/p-streamrec.xml`: Unraid Community Apps template for P-StreamRec.
+- `plugins/`: one active `.xml` wrapper per plugin, when plugins are added.
 
 ## Adding Entries
 
-The example files are kept as `.xml.example` references so Community Apps does not scan placeholder entries. Copy the relevant example to a new `.xml` file, replace every placeholder, and keep each template's URL pointed at the raw GitHub URL for that exact file.
+Keep one active `.xml` file per Docker app under `templates/` and one active `.xml` wrapper per plugin under `plugins/`. Placeholder examples are intentionally not tracked, so Community Apps only scans real entries.
 
 ## Submission Notes
 

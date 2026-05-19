@@ -11,6 +11,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `templates/lnbits.xml`: Unraid Community Apps template for LNbits.
 - `templates/p-streamrec.xml`: Unraid Community Apps template for P-StreamRec.
 - `templates/phoenixd.xml`: Unraid Community Apps template for Phoenixd.
+- `templates/robosats.xml`: Unraid Community Apps template for RoboSats.
 - `templates/thunderhub.xml`: Unraid Community Apps template for ThunderHub.
 - `plugins/`: one active `.xml` wrapper per plugin, when plugins are added.
 

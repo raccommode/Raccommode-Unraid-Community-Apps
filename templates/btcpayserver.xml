@@ -1,0 +1,36 @@
+<Container version="2">
+  <Name>BTCPayServer</Name>
+  <Repository>btcpayserver/btcpayserver:2.3.9</Repository>
+  <Registry>https://hub.docker.com/r/btcpayserver/btcpayserver</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:49392]</WebUI>
+  <Overview>BTCPay Server is a free and open-source Bitcoin payment processor for self-hosted stores, invoices, checkout, wallets, point-of-sale flows, plugins, and webhooks without third-party payment processor fees.</Overview>
+  <Support>https://github.com/btcpayserver/btcpayserver/issues</Support>
+  <Project>https://github.com/btcpayserver/btcpayserver</Project>
+  <ReadMe>https://docs.btcpayserver.org/Docker/</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/btcpayserver.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/logo.png</Icon>
+  <Category>Network:Other Tools:Utilities</Category>
+  <Requires>This template runs the BTCPay Server application container only. The officially supported deployment is a Docker Compose stack with Postgres, NBXplorer, and a Bitcoin full node, plus optional reverse proxy and Lightning services. Configure those services separately and point the Postgres, Explorer, and Bitcoin variables below at them before using BTCPay with real funds. If using container names such as postgres or nbxplorer, place all containers on the same custom Docker network.</Requires>
+  <License>MIT License</License>
+  <Screenshot>https://raw.githubusercontent.com/btcpayserver/btcpayserver/master/BTCPayServer/wwwroot/img/btc_pay_BG_twitter.png</Screenshot>
+  <Config Name="Web UI Port" Target="49392" Default="49392" Mode="tcp" Description="BTCPay Server web interface and internal API port. Container port: 49392." Type="Port" Display="always" Required="true" Mask="false">49392</Config>
+  <Config Name="Data" Target="/datadir" Default="/mnt/user/appdata/btcpayserver" Mode="rw" Description="Persistent BTCPay Server data directory. Back this directory up before processing real payments." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/btcpayserver</Config>
+  <Config Name="Plugins" Target="/root/.btcpayserver/Plugins" Default="/mnt/user/appdata/btcpayserver/plugins" Mode="rw" Description="Persistent BTCPay Server plugins directory." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/btcpayserver/plugins</Config>
+  <Config Name="Bind Address" Target="BTCPAY_BIND" Default="0.0.0.0:49392" Mode="" Description="Address and port BTCPay binds to inside the container." Type="Variable" Display="always" Required="true" Mask="false">0.0.0.0:49392</Config>
+  <Config Name="Network" Target="BTCPAY_NETWORK" Default="mainnet" Mode="" Description="Bitcoin network. Use mainnet, testnet, signet, or regtest." Type="Variable" Display="always" Required="true" Mask="false">mainnet</Config>
+  <Config Name="Chains" Target="BTCPAY_CHAINS" Default="btc" Mode="" Description="Comma-separated crypto chains enabled in BTCPay. This template defaults to Bitcoin only." Type="Variable" Display="always" Required="true" Mask="false">btc</Config>
+  <Config Name="Public Host" Target="BTCPAY_HOST" Default="" Mode="" Description="Optional public hostname, for example btcpay.example.com. Use a reverse proxy for HTTPS when exposing BTCPay outside your LAN." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <Config Name="Root Path" Target="BTCPAY_ROOTPATH" Default="/" Mode="" Description="BTCPay root path when served from a subpath. Use / for normal deployments." Type="Variable" Display="advanced" Required="false" Mask="false">/</Config>
+  <Config Name="Postgres Connection" Target="BTCPAY_POSTGRES" Default="User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;Database=btcpayservermainnet" Mode="" Description="Required Postgres connection string for the BTCPay Server database." Type="Variable" Display="always" Required="true" Mask="true">User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;Database=btcpayservermainnet</Config>
+  <Config Name="Explorer Postgres Connection" Target="BTCPAY_EXPLORERPOSTGRES" Default="User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;MaxPoolSize=80;Database=nbxplorermainnet" Mode="" Description="Required Postgres connection string for NBXplorer data, used by BTCPay to read explorer state." Type="Variable" Display="always" Required="true" Mask="true">User ID=postgres;Host=postgres;Port=5432;Application Name=btcpayserver;MaxPoolSize=80;Database=nbxplorermainnet</Config>
+  <Config Name="BTC Explorer URL" Target="BTCPAY_BTCEXPLORERURL" Default="http://nbxplorer:32838/" Mode="" Description="Required NBXplorer URL for Bitcoin, for example http://nbxplorer:32838/ on a custom Docker network or http://UNRAID-IP:32838/." Type="Variable" Display="always" Required="true" Mask="false">http://nbxplorer:32838/</Config>
+  <Config Name="Docker Deployment Mode" Target="BTCPAY_DOCKERDEPLOYMENT" Default="true" Mode="" Description="Marks this BTCPay instance as Docker-deployed. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="No Default Chain" Target="BTCPAY_NODEFAULTCHAIN" Default="true" Mode="" Description="Prevents BTCPay from assuming a chain without explicit chain variables. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">true</Config>
+  <Config Name="Update URL" Target="BTCPAY_UPDATEURL" Default="https://api.github.com/repos/btcpayserver/btcpayserver/releases/latest" Mode="" Description="Release URL used by BTCPay to check for new versions." Type="Variable" Display="advanced" Required="false" Mask="false">https://api.github.com/repos/btcpayserver/btcpayserver/releases/latest</Config>
+  <Config Name="Debug Log" Target="BTCPAY_DEBUGLOG" Default="btcpay.log" Mode="" Description="Debug log filename under the BTCPay data directory." Type="Variable" Display="advanced" Required="false" Mask="false">btcpay.log</Config>
+  <Config Name="Lightning Connection" Target="BTCPAY_BTCLIGHTNING" Default="" Mode="" Description="Optional Bitcoin Lightning connection string. For example, type=clightning;server=unix://etc/clightning_bitcoin/lightning-rpc, or leave blank to configure later in BTCPay." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+</Container>

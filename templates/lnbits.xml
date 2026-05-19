@@ -1,0 +1,47 @@
+<Container version="2">
+  <Name>LNbits</Name>
+  <Repository>lnbits/lnbits:latest</Repository>
+  <Registry>https://hub.docker.com/r/lnbits/lnbits</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:5000]</WebUI>
+  <Overview>LNbits is a free and open-source Bitcoin Lightning wallet and accounts system. It provides isolated wallets, API keys, LNURL tools, extensions, merchant workflows, and admin controls on top of a configurable Lightning funding source.</Overview>
+  <Support>https://github.com/lnbits/lnbits/issues</Support>
+  <Project>https://github.com/lnbits/lnbits</Project>
+  <ReadMe>https://docs.lnbits.org/guide/installation.html</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/lnbits.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/lnbits/lnbits/main/docs/logos/lnbits.png</Icon>
+  <Category>Network:Other Tools:Utilities</Category>
+  <Requires>LNbits stores its SQLite database, logs, super user state, and installed extensions in the Data path. Back this directory up before using real funds. The default backend is VoidWallet so the UI can start without a Lightning node; set Backend Wallet Class and the matching advanced variables before accepting real payments. The Admin UI stores most settings in the database after first install, so use the Admin UI or reset stored settings if later environment changes do not appear.</Requires>
+  <License>MIT License</License>
+  <Screenshot>https://raw.githubusercontent.com/lnbits/lnbits/main/docs/assets/wallet.jpg</Screenshot>
+  <Config Name="Web UI Port" Target="5000" Default="5000" Mode="tcp" Description="LNbits web interface and API port. Container port: 5000." Type="Port" Display="always" Required="true" Mask="false">5000</Config>
+  <Config Name="Data" Target="/app/data" Default="/mnt/user/appdata/lnbits" Mode="rw" Description="Persistent LNbits data, SQLite database, logs, super user state, backups, and installed extensions." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/lnbits</Config>
+  <Config Name="Config File" Target="/app/.env" Default="" Mode="ro" Description="Optional .env file based on the upstream .env.example. Leave blank to configure with the variables in this template and the Admin UI." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Data Folder" Target="LNBITS_DATA_FOLDER" Default="/app/data" Mode="" Description="LNbits data folder inside the container. Keep this pointed at the Data mount." Type="Variable" Display="always" Required="true" Mask="false">/app/data</Config>
+  <Config Name="Extensions Path" Target="LNBITS_EXTENSIONS_PATH" Default="/app/data/extensions" Mode="" Description="Persistent path for installed LNbits extensions. Without this, installed extensions can be lost when the container is recreated." Type="Variable" Display="always" Required="true" Mask="false">/app/data/extensions</Config>
+  <Config Name="Admin UI" Target="LNBITS_ADMIN_UI" Default="true" Mode="" Description="Enable the LNbits Admin UI and first-install super user flow. Use true or false." Type="Variable" Display="always" Required="true" Mask="false">true</Config>
+  <Config Name="HTTPS Only Auth Cookies" Target="AUTH_HTTPS_ONLY" Default="false" Mode="" Description="Set true when LNbits is served only over HTTPS. Leave false for direct local HTTP access through the Unraid Web UI." Type="Variable" Display="always" Required="true" Mask="false">false</Config>
+  <Config Name="Backend Wallet Class" Target="LNBITS_BACKEND_WALLET_CLASS" Default="VoidWallet" Mode="" Description="Lightning funding source class. Start with VoidWallet for testing, then use PhoenixdWallet, LndRestWallet, LndWallet, CoreLightningWallet, or another supported backend." Type="Variable" Display="always" Required="true" Mask="false">VoidWallet</Config>
+  <Config Name="Default Extensions" Target="LNBITS_EXTENSIONS_DEFAULT_INSTALL" Default="tpos" Mode="" Description="Comma-separated extensions installed by default on restart. Remove an extension from this list before uninstalling it permanently." Type="Variable" Display="advanced" Required="false" Mask="false">tpos</Config>
+  <Config Name="Public Base URL" Target="LNBITS_BASEURL" Default="" Mode="" Description="Optional public URL used behind a reverse proxy, for example https://lnbits.example.com/." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Site Title" Target="LNBITS_SITE_TITLE" Default="LNbits" Mode="" Description="Browser and UI title for this LNbits instance." Type="Variable" Display="advanced" Required="false" Mask="false">LNbits</Config>
+  <Config Name="Auth Secret Key" Target="AUTH_SECRET_KEY" Default="" Mode="" Description="Recommended strong random secret for auth signing. Set this before production use." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="First Install Token" Target="FIRST_INSTALL_TOKEN" Default="" Mode="" Description="Optional token required on the first-install page." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Allowed Auth Methods" Target="AUTH_ALLOWED_METHODS" Default="user-id-only, username-password" Mode="" Description="Comma-separated auth methods, for example user-id-only, username-password, nostr-auth-nip98, google-auth, github-auth, keycloak-auth, or oidc-auth." Type="Variable" Display="advanced" Required="false" Mask="false">user-id-only, username-password</Config>
+  <Config Name="Debug" Target="DEBUG" Default="False" Mode="" Description="Enable verbose debug mode. Use True or False." Type="Variable" Display="advanced" Required="false" Mask="false">False</Config>
+  <Config Name="Forwarded Allow IPs" Target="FORWARDED_ALLOW_IPS" Default="*" Mode="" Description="Trusted proxy IPs for forwarded headers. Use * when LNbits is behind a trusted local reverse proxy." Type="Variable" Display="advanced" Required="false" Mask="false">*</Config>
+  <Config Name="Postgres Database URL" Target="LNBITS_DATABASE_URL" Default="" Mode="" Description="Optional external database URL. Leave blank to use SQLite in the Data path." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Phoenixd API Endpoint" Target="PHOENIXD_API_ENDPOINT" Default="" Mode="" Description="Required when Backend Wallet Class is PhoenixdWallet. Use the reachable Phoenixd HTTP API URL, for example http://UNRAID-IP:9740/ or http://phoenixd:9740/ on a custom Docker network." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Phoenixd API Password" Target="PHOENIXD_API_PASSWORD" Default="" Mode="" Description="Required when Backend Wallet Class is PhoenixdWallet. Use the Phoenixd full-access API password from phoenix.conf." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="LND Data" Target="/lnd" Default="" Mode="ro" Description="Optional read-only mount for an LND data directory. Useful when using LndWallet or LndRestWallet with cert and macaroon paths under /lnd." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="LND REST Endpoint" Target="LND_REST_ENDPOINT" Default="" Mode="" Description="Required when Backend Wallet Class is LndRestWallet. Use the reachable LND REST URL, for example https://UNRAID-IP:8081/ or https://lnd:8080/ on a custom Docker network." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="LND REST Cert" Target="LND_REST_CERT" Default="/lnd/tls.cert" Mode="" Description="LND TLS certificate path inside the LNbits container, or the certificate content accepted by LNbits." Type="Variable" Display="advanced" Required="false" Mask="false">/lnd/tls.cert</Config>
+  <Config Name="LND REST Macaroon" Target="LND_REST_MACAROON" Default="/lnd/data/chain/bitcoin/mainnet/admin.macaroon" Mode="" Description="LND admin macaroon path inside the LNbits container, or hex/base64 macaroon content." Type="Variable" Display="advanced" Required="false" Mask="true">/lnd/data/chain/bitcoin/mainnet/admin.macaroon</Config>
+  <Config Name="LND gRPC Endpoint" Target="LND_GRPC_ENDPOINT" Default="" Mode="" Description="Required when Backend Wallet Class is LndWallet. Hostname or IP of the LND gRPC endpoint." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="LND gRPC Port" Target="LND_GRPC_PORT" Default="10009" Mode="" Description="Required when Backend Wallet Class is LndWallet. LND gRPC port." Type="Variable" Display="advanced" Required="false" Mask="false">10009</Config>
+  <Config Name="LND gRPC Cert" Target="LND_GRPC_CERT" Default="/lnd/tls.cert" Mode="" Description="LND TLS certificate path inside the LNbits container, or the certificate content accepted by LNbits." Type="Variable" Display="advanced" Required="false" Mask="false">/lnd/tls.cert</Config>
+  <Config Name="LND gRPC Macaroon" Target="LND_GRPC_MACAROON" Default="/lnd/data/chain/bitcoin/mainnet/admin.macaroon" Mode="" Description="LND admin macaroon path inside the LNbits container, or hex/base64 macaroon content." Type="Variable" Display="advanced" Required="false" Mask="true">/lnd/data/chain/bitcoin/mainnet/admin.macaroon</Config>
+</Container>

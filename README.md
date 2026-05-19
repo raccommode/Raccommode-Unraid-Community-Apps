@@ -7,6 +7,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `ca_profile.xml`: repository overview and support metadata shown in Community Apps.
 - `icon.jpg`: repository icon referenced by `ca_profile.xml`.
 - `templates/lnd.xml`: Unraid Community Apps template for LND.
+- `templates/lnbits.xml`: Unraid Community Apps template for LNbits.
 - `templates/p-streamrec.xml`: Unraid Community Apps template for P-StreamRec.
 - `templates/phoenixd.xml`: Unraid Community Apps template for Phoenixd.
 - `templates/thunderhub.xml`: Unraid Community Apps template for ThunderHub.

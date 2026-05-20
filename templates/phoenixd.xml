@@ -6,7 +6,7 @@
   <MyIP/>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <ExtraParams>--user 99:100</ExtraParams>
+  <ExtraParams>--user 0:0</ExtraParams>
   <WebUI/>
   <Overview>Phoenixd is the server equivalent of the Phoenix self-custodial Bitcoin Lightning wallet. It runs a Phoenix node with automated liquidity management and exposes an HTTP API for balance, invoices, payments, exports, and webhooks.</Overview>
   <Support>https://github.com/ACINQ/phoenixd/issues</Support>
@@ -15,9 +15,9 @@
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/phoenixd.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/ACINQ/phoenix/master/phoenix-android/src/main/res/mipmap-xxxhdpi/ic_launcher.png</Icon>
   <Category>Network:Other Tools:Utilities</Category>
-  <Requires>Phoenixd is self-custodial and can custody real bitcoin. Back up seed.dat and phoenix.conf from the Data path before funding the wallet. Do not reuse the same seed with another Phoenix mobile or server instance. The HTTP API uses Basic Auth; the full-access and limited-access passwords are generated in phoenix.conf on first start, and can be edited there with phoenixd option names such as http-password, http-password-limited-access, webhook, auto-liquidity, max-mining-fee, and mempool-space-url. This template runs Phoenixd as Unraid nobody:users (uid 99, gid 100) with HOME=/phoenix so the default appdata path is writable. If the Data path was already created with different ownership, run: chown -R 99:100 /mnt/user/appdata/phoenixd</Requires>
+  <Requires>Phoenixd is self-custodial and can custody real bitcoin. Back up seed.dat and phoenix.conf from the Data path before funding the wallet. Do not reuse the same seed with another Phoenix mobile or server instance. The HTTP API uses Basic Auth; the full-access and limited-access passwords are generated in phoenix.conf on first start, and can be edited there with phoenixd option names such as http-password, http-password-limited-access, webhook, auto-liquidity, max-mining-fee, and mempool-space-url. This template runs Phoenixd as root with HOME=/phoenix so Unraid appdata directories created with restrictive ownership are still writable and Phoenixd keeps using /phoenix/.phoenix. If you previously created the Data path with another user, run this once from an Unraid terminal before restarting: mkdir -p /mnt/user/appdata/phoenixd &amp;&amp; chown -R 0:0 /mnt/user/appdata/phoenixd &amp;&amp; chmod -R u+rwX /mnt/user/appdata/phoenixd</Requires>
   <License>Apache-2.0</License>
   <Config Name="HTTP API Port" Target="9740" Default="9740" Mode="tcp" Description="Phoenixd HTTP API port. Container port: 9740. The API requires Basic Auth using the password generated in phoenix.conf." Type="Port" Display="always" Required="true" Mask="false">9740</Config>
-  <Config Name="Data" Target="/phoenix/.phoenix" Default="/mnt/user/appdata/phoenixd" Mode="rw" Description="Persistent wallet seed, phoenix.conf API passwords, channel database, payment database, logs, and exports. Keep this path writable by uid 99/gid 100 and back it up before funding the wallet." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/phoenixd</Config>
+  <Config Name="Data" Target="/phoenix/.phoenix" Default="/mnt/user/appdata/phoenixd" Mode="rw" Description="Persistent wallet seed, phoenix.conf API passwords, channel database, payment database, logs, and exports. Keep this path writable by the container and back it up before funding the wallet." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/phoenixd</Config>
   <Config Name="Home" Target="HOME" Default="/phoenix" Mode="" Description="Container home directory. Keep this set to /phoenix so Phoenixd writes to the mounted Data path at /phoenix/.phoenix." Type="Variable" Display="advanced" Required="true" Mask="false">/phoenix</Config>
 </Container>

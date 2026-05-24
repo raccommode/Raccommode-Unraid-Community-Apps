@@ -1,0 +1,27 @@
+<Container version="2">
+  <Name>SupabaseMeta</Name>
+  <Repository>supabase/postgres-meta:v0.96.3</Repository>
+  <Registry>https://hub.docker.com/r/supabase/postgres-meta</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI/>
+  <Overview>Postgres Meta is the Supabase REST API for managing Postgres metadata. Supabase Studio uses it to list schemas, tables, roles, extensions, policies, SQL results, and database settings.</Overview>
+  <Support>https://github.com/supabase/postgres-meta/issues</Support>
+  <Project>https://github.com/supabase/postgres-meta</Project>
+  <ReadMe>https://supabase.com/docs/guides/self-hosting/docker</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/supabase-meta.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-icon.png</Icon>
+  <Category>Network:Management Tools:Utilities</Category>
+  <Requires>This template runs only the Postgres Meta service from the official Supabase Docker Compose stack. It requires a Supabase Postgres database that has been initialized with the official Supabase roles and schemas. Put Studio, Kong, Postgres Meta, and Postgres on the same custom Docker network, and make Studio's STUDIO_PG_META_URL point to this container, for example http://SupabaseMeta:8080 or a matching network alias. The current Supabase Docker release uses PG_META_DB_USER=supabase_admin; upcoming releases may switch fresh installs to postgres.</Requires>
+  <License>Apache-2.0</License>
+  <Config Name="API Port" Target="8080" Default="8080" Mode="tcp" Description="Optional Postgres Meta REST API port. Container port: 8080. Studio normally reaches this over the internal Docker network." Type="Port" Display="advanced" Required="false" Mask="false">8080</Config>
+  <Config Name="Meta Port" Target="PG_META_PORT" Default="8080" Mode="" Description="Port Postgres Meta listens on inside the container." Type="Variable" Display="advanced" Required="true" Mask="false">8080</Config>
+  <Config Name="Postgres Host" Target="PG_META_DB_HOST" Default="db" Mode="" Description="Hostname for the Supabase Postgres service as seen from Postgres Meta." Type="Variable" Display="always" Required="true" Mask="false">db</Config>
+  <Config Name="Postgres Port" Target="PG_META_DB_PORT" Default="5432" Mode="" Description="Supabase Postgres or Supavisor session port." Type="Variable" Display="always" Required="true" Mask="false">5432</Config>
+  <Config Name="Postgres Database" Target="PG_META_DB_NAME" Default="postgres" Mode="" Description="Supabase Postgres database name." Type="Variable" Display="always" Required="true" Mask="false">postgres</Config>
+  <Config Name="Postgres User" Target="PG_META_DB_USER" Default="supabase_admin" Mode="" Description="Database role used by Postgres Meta. Current self-hosted releases use supabase_admin; newer releases may use postgres after the ownership migration." Type="Variable" Display="always" Required="true" Mask="false">supabase_admin</Config>
+  <Config Name="Postgres Password" Target="PG_META_DB_PASSWORD" Default="" Mode="" Description="Database password generated for the Supabase stack." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Crypto Key" Target="CRYPTO_KEY" Default="" Mode="" Description="Postgres Meta encryption key. Use the same value as PG_META_CRYPTO_KEY from the Supabase .env file." Type="Variable" Display="always" Required="true" Mask="true"/>
+</Container>

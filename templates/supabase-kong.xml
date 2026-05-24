@@ -1,0 +1,45 @@
+<Container version="2">
+  <Name>SupabaseKong</Name>
+  <Repository>kong/kong:3.9.1</Repository>
+  <Registry>https://hub.docker.com/r/kong/kong</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>bash</Shell>
+  <Privileged>false</Privileged>
+  <ExtraParams>--entrypoint=/bin/bash</ExtraParams>
+  <PostArgs>/home/kong/kong-entrypoint.sh</PostArgs>
+  <WebUI>http://[IP]:[PORT:8000]</WebUI>
+  <Overview>Kong is the API gateway used by the official self-hosted Supabase Docker stack. It routes Studio, Auth, REST, GraphQL, Realtime, Storage, and Edge Functions through a single public endpoint.</Overview>
+  <Support>https://github.com/supabase/supabase/issues</Support>
+  <Project>https://github.com/Kong/kong</Project>
+  <ReadMe>https://supabase.com/docs/guides/self-hosting/docker</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/supabase-kong.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-icon.png</Icon>
+  <Category>Network:Proxy:Management Tools</Category>
+  <Requires>This template runs only the Kong gateway container from the official Supabase Docker Compose stack. It requires the Supabase kong.yml and kong-entrypoint.sh files from supabase/docker/volumes/api mounted below. It does not install Studio, Auth, PostgREST, Realtime, Storage, Edge Runtime, Postgres Meta, or Postgres. Put all Supabase containers on the same custom Docker network and make sure the service hostnames used inside kong.yml, such as studio, auth, rest, realtime, storage, functions, and meta, resolve to the matching containers. Generate new Supabase keys before first use; never keep the example keys.</Requires>
+  <License>Apache-2.0</License>
+  <Config Name="HTTP Gateway Port" Target="8000" Default="8000" Mode="tcp" Description="Supabase HTTP API gateway port. Container port: 8000." Type="Port" Display="always" Required="true" Mask="false">8000</Config>
+  <Config Name="HTTPS Gateway Port" Target="8443" Default="8443" Mode="tcp" Description="Supabase HTTPS API gateway port. Container port: 8443. Mount TLS files and set Kong SSL variables if you enable direct TLS here." Type="Port" Display="advanced" Required="false" Mask="false">8443</Config>
+  <Config Name="Kong Config" Target="/home/kong/temp.yml" Default="/mnt/user/appdata/supabase-kong/kong.yml" Mode="ro" Description="Official Supabase Kong declarative config copied from supabase/docker/volumes/api/kong.yml." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/supabase-kong/kong.yml</Config>
+  <Config Name="Kong Entrypoint" Target="/home/kong/kong-entrypoint.sh" Default="/mnt/user/appdata/supabase-kong/kong-entrypoint.sh" Mode="ro" Description="Official Supabase Kong entrypoint copied from supabase/docker/volumes/api/kong-entrypoint.sh." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/supabase-kong/kong-entrypoint.sh</Config>
+  <Config Name="TLS Certificate" Target="/home/kong/server.crt" Default="" Mode="ro" Description="Optional TLS certificate for direct HTTPS on Kong. Usually a reverse proxy terminates TLS instead." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="TLS Private Key" Target="/home/kong/server.key" Default="" Mode="ro" Description="Optional TLS private key for direct HTTPS on Kong. Usually a reverse proxy terminates TLS instead." Type="Path" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Database Mode" Target="KONG_DATABASE" Default="off" Mode="" Description="Kong database mode. Supabase uses declarative DB-less config." Type="Variable" Display="always" Required="true" Mask="false">off</Config>
+  <Config Name="Declarative Config Path" Target="KONG_DECLARATIVE_CONFIG" Default="/usr/local/kong/kong.yml" Mode="" Description="Generated Kong config path inside the container." Type="Variable" Display="advanced" Required="true" Mask="false">/usr/local/kong/kong.yml</Config>
+  <Config Name="DNS Order" Target="KONG_DNS_ORDER" Default="LAST,A,CNAME" Mode="" Description="Kong DNS resolution order used by the Supabase stack." Type="Variable" Display="advanced" Required="false" Mask="false">LAST,A,CNAME</Config>
+  <Config Name="DNS Not Found TTL" Target="KONG_DNS_NOT_FOUND_TTL" Default="1" Mode="" Description="Kong DNS negative cache TTL in seconds." Type="Variable" Display="advanced" Required="false" Mask="false">1</Config>
+  <Config Name="Plugins" Target="KONG_PLUGINS" Default="request-transformer,cors,key-auth,acl,basic-auth,request-termination,ip-restriction,post-function" Mode="" Description="Kong plugins required by the Supabase gateway config." Type="Variable" Display="advanced" Required="true" Mask="false">request-transformer,cors,key-auth,acl,basic-auth,request-termination,ip-restriction,post-function</Config>
+  <Config Name="Proxy Buffer Size" Target="KONG_NGINX_PROXY_PROXY_BUFFER_SIZE" Default="160k" Mode="" Description="Kong Nginx proxy buffer size used by the Supabase stack." Type="Variable" Display="advanced" Required="false" Mask="false">160k</Config>
+  <Config Name="Proxy Buffers" Target="KONG_NGINX_PROXY_PROXY_BUFFERS" Default="64 160k" Mode="" Description="Kong Nginx proxy buffers used by the Supabase stack." Type="Variable" Display="advanced" Required="false" Mask="false">64 160k</Config>
+  <Config Name="Proxy Access Log" Target="KONG_PROXY_ACCESS_LOG" Default="/dev/stdout combined" Mode="" Description="Kong proxy access log target." Type="Variable" Display="advanced" Required="false" Mask="false">/dev/stdout combined</Config>
+  <Config Name="SSL Certificate Path" Target="KONG_SSL_CERT" Default="" Mode="" Description="Optional TLS certificate path inside the container, for example /home/kong/server.crt." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="SSL Key Path" Target="KONG_SSL_CERT_KEY" Default="" Mode="" Description="Optional TLS private key path inside the container, for example /home/kong/server.key." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Anon Key" Target="SUPABASE_ANON_KEY" Default="" Mode="" Description="Legacy anon API key generated for the Supabase stack." Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Service Role Key" Target="SUPABASE_SERVICE_KEY" Default="" Mode="" Description="Legacy service role API key. Never expose this key to client-side code." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Publishable Key" Target="SUPABASE_PUBLISHABLE_KEY" Default="" Mode="" Description="Optional opaque publishable API key for newer self-hosted Supabase setups." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Secret Key" Target="SUPABASE_SECRET_KEY" Default="" Mode="" Description="Optional opaque secret API key for newer self-hosted Supabase setups. Never expose this key to client-side code." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Anon Asymmetric Key" Target="ANON_KEY_ASYMMETRIC" Default="" Mode="" Description="Optional pre-signed asymmetric JWT API key for the anon role." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Service Role Asymmetric Key" Target="SERVICE_ROLE_KEY_ASYMMETRIC" Default="" Mode="" Description="Optional pre-signed asymmetric JWT API key for the service_role role." Type="Variable" Display="advanced" Required="false" Mask="true"/>
+  <Config Name="Dashboard Username" Target="DASHBOARD_USERNAME" Default="supabase" Mode="" Description="Basic auth username for Supabase Studio through Kong." Type="Variable" Display="always" Required="true" Mask="false">supabase</Config>
+  <Config Name="Dashboard Password" Target="DASHBOARD_PASSWORD" Default="" Mode="" Description="Basic auth password for Supabase Studio through Kong. Set a secure password before first start." Type="Variable" Display="always" Required="true" Mask="true"/>
+</Container>

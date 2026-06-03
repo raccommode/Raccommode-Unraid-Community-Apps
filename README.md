@@ -16,6 +16,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `templates/supabase-meta.xml`: Unraid Community Apps template for Supabase Postgres Meta.
 - `templates/supabase-studio.xml`: Unraid Community Apps template for Supabase Studio.
 - `templates/thunderhub.xml`: Unraid Community Apps template for ThunderHub.
+- `templates/tor-proxy.xml`: Unraid Community Apps template for Tor Proxy.
 - `plugins/`: one active `.xml` wrapper per plugin, when plugins are added.
 
 ## Adding Entries

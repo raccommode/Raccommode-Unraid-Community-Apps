@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>BTCPayServer</Name>
-  <Repository>btcpayserver/btcpayserver:2.3.9</Repository>
+  <Repository>btcpayserver/btcpayserver:latest</Repository>
   <Registry>https://hub.docker.com/r/btcpayserver/btcpayserver</Registry>
   <Network>bridge</Network>
   <MyIP/>

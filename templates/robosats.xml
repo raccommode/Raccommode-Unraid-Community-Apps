@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>RoboSats</Name>
-  <Repository>recksato/robosats-client:v0.8.4-alpha</Repository>
+  <Repository>recksato/robosats-client:latest</Repository>
   <Registry>https://hub.docker.com/r/recksato/robosats-client</Registry>
   <Network>bridge</Network>
   <MyIP/>

@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>SupabaseKong</Name>
-  <Repository>kong/kong:3.9.1</Repository>
+  <Repository>kong/kong:latest</Repository>
   <Registry>https://hub.docker.com/r/kong/kong</Registry>
   <Network>bridge</Network>
   <MyIP/>

@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>SupabaseMeta</Name>
-  <Repository>supabase/postgres-meta:v0.96.3</Repository>
+  <Repository>supabase/postgres-meta:latest</Repository>
   <Registry>https://hub.docker.com/r/supabase/postgres-meta</Registry>
   <Network>bridge</Network>
   <MyIP/>

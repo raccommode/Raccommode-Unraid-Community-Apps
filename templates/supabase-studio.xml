@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>SupabaseStudio</Name>
-  <Repository>supabase/studio:2026.04.27-sha-5f60601</Repository>
+  <Repository>supabase/studio:latest</Repository>
   <Registry>https://hub.docker.com/r/supabase/studio</Registry>
   <Network>bridge</Network>
   <MyIP/>
@@ -14,7 +14,7 @@
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/supabase-studio.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-icon.png</Icon>
   <Category>Network:Management Tools:Utilities</Category>
-  <Requires>This template runs only the Supabase Studio dashboard container from the official Supabase Docker Compose stack. The Studio image tag matches Supabase Docker release v1.26.05. It does not install Kong, Auth, PostgREST, Realtime, Storage, Edge Runtime, Logflare, Vector, Supavisor, or Postgres. Follow the official Docker guide in ReadMe to deploy the full stack, keep matching image versions together, and place this container on the same custom Docker network as services named kong, meta, analytics, and db before relying on the default URLs below. Generate new secrets with the Supabase scripts before first use; never keep the example keys.</Requires>
+  <Requires>This template runs only the Supabase Studio dashboard container from the official Supabase Docker Compose stack. It does not install Kong, Auth, PostgREST, Realtime, Storage, Edge Runtime, Logflare, Vector, Supavisor, or Postgres. Follow the official Docker guide in ReadMe to deploy the full stack, keep matching image tags together, and place this container on the same custom Docker network as services named kong, meta, analytics, and db before relying on the default URLs below. Generate new secrets with the Supabase scripts before first use; never keep the example keys.</Requires>
   <License>Apache-2.0</License>
   <Screenshot>https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/logo-preview.jpg</Screenshot>
   <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp" Description="Supabase Studio web interface port. Container port: 3000. The official full stack normally exposes Studio through Kong on port 8000." Type="Port" Display="always" Required="true" Mask="false">3000</Config>

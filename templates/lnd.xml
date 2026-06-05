@@ -1,6 +1,6 @@
 <Container version="2">
   <Name>LND</Name>
-  <Repository>lightninglabs/lnd:v0.20.1-beta</Repository>
+  <Repository>lightninglabs/lnd:latest</Repository>
   <Registry>https://hub.docker.com/r/lightninglabs/lnd</Registry>
   <Network>bridge</Network>
   <MyIP/>

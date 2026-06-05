@@ -7,18 +7,18 @@
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
   <WebUI>http://[IP]:[PORT:12596]</WebUI>
-  <Overview>RoboSats is a simple and private peer-to-peer Bitcoin exchange client. It serves the local web app and proxies coordinator API traffic through a Tor SOCKS proxy, using Lightning hold invoices to reduce custody and trust requirements.</Overview>
+  <Overview>RoboSats is a simple and private peer-to-peer Bitcoin exchange client. It serves the local web app and can proxy coordinator API traffic through a Tor SOCKS proxy, using Lightning hold invoices to reduce custody and trust requirements.</Overview>
   <Support>https://github.com/RoboSats/robosats/issues</Support>
   <Project>https://github.com/RoboSats/robosats</Project>
   <ReadMe>https://github.com/RoboSats/robosats/tree/main/nodeapp</ReadMe>
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/robosats.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/RoboSats/robosats/main/nodeapp/assets/icon/Robosats.svg</Icon>
   <Category>Network:Other Tools:Utilities</Category>
-  <Requires>This template runs the RoboSats self-hosted client, not a coordinator backend, Lightning node, database, or Tor daemon. The client needs a reachable SOCKS Tor proxy through TOR_PROXY_IP and TOR_PROXY_PORT. Upstream's compose example shares a Tor container network namespace with the client; on Unraid, use a reachable Tor container or host proxy and adjust these variables accordingly before trading.</Requires>
+  <Requires>This template runs the RoboSats self-hosted client, not a coordinator backend, Lightning node, database, or Tor daemon. For private/full use, configure a reachable SOCKS Tor proxy through TOR_PROXY_IP and TOR_PROXY_PORT. The upstream client defaults to 127.0.0.1:9050 when these variables are blank and coordinator connectivity will fail unless a proxy is reachable there. Leave the Tor fields blank only if you intentionally want the local web UI without self-hosted coordinator connectivity, or if you provide your own image/runtime override.</Requires>
   <License>AGPL-3.0 License</License>
   <Screenshot>https://raw.githubusercontent.com/RoboSats/robosats/main/nodeapp/assets/images/screenshots/1.png</Screenshot>
   <Screenshot>https://raw.githubusercontent.com/RoboSats/robosats/main/nodeapp/assets/images/screenshots/2.png</Screenshot>
   <Config Name="Web UI Port" Target="12596" Default="12596" Mode="tcp" Description="RoboSats self-hosted client web interface. Container port: 12596." Type="Port" Display="always" Required="true" Mask="false">12596</Config>
-  <Config Name="Tor Proxy IP" Target="TOR_PROXY_IP" Default="127.0.0.1" Mode="" Description="SOCKS Tor proxy host used by the client to reach coordinators. Use 127.0.0.1 only when the Tor proxy shares this container's network namespace; otherwise use a reachable Tor container hostname, IP, or host proxy address." Type="Variable" Display="always" Required="true" Mask="false">127.0.0.1</Config>
-  <Config Name="Tor Proxy Port" Target="TOR_PROXY_PORT" Default="9050" Mode="" Description="SOCKS Tor proxy port used by the client to reach coordinators." Type="Variable" Display="always" Required="true" Mask="false">9050</Config>
+  <Config Name="Tor Proxy IP" Target="TOR_PROXY_IP" Default="" Mode="" Description="Optional SOCKS Tor proxy host used by the client to reach coordinators. Use a reachable Tor container hostname, IP, or host proxy address. Leave blank only for local UI use without coordinator connectivity or when overriding the image runtime." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Tor Proxy Port" Target="TOR_PROXY_PORT" Default="" Mode="" Description="Optional SOCKS Tor proxy port used by the client to reach coordinators, commonly 9050. Leave blank only with the same caveats as Tor Proxy IP." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 </Container>

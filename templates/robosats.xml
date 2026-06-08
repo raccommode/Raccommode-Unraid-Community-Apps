@@ -19,6 +19,7 @@
   <Screenshot>https://raw.githubusercontent.com/RoboSats/robosats/main/nodeapp/assets/images/screenshots/1.png</Screenshot>
   <Screenshot>https://raw.githubusercontent.com/RoboSats/robosats/main/nodeapp/assets/images/screenshots/2.png</Screenshot>
   <Config Name="Web UI Port" Target="12596" Default="12596" Mode="tcp" Description="RoboSats self-hosted client web interface. Container port: 12596." Type="Port" Display="always" Required="true" Mask="false">12596</Config>
+  <Config Name="Install Path" Target="/var/lib/robosats" Default="/mnt/user/appdata/robosats" Mode="rw" Description="Host path used as the Unraid install/appdata location for this RoboSats container." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/robosats</Config>
   <Config Name="Tor Proxy IP" Target="TOR_PROXY_IP" Default="" Mode="" Description="Optional SOCKS Tor proxy host used by the client to reach coordinators. Use a reachable Tor container hostname, IP, or host proxy address. Leave blank only for local UI use without coordinator connectivity or when overriding the image runtime." Type="Variable" Display="advanced" Required="false" Mask="false"/>
   <Config Name="Tor Proxy Port" Target="TOR_PROXY_PORT" Default="" Mode="" Description="Optional SOCKS Tor proxy port used by the client to reach coordinators, commonly 9050. Leave blank only with the same caveats as Tor Proxy IP." Type="Variable" Display="advanced" Required="false" Mask="false"/>
 </Container>

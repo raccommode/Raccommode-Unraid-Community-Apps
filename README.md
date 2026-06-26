@@ -9,6 +9,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `templates/btcpayserver.xml`: Unraid Community Apps template for BTCPay Server.
 - `templates/lnd.xml`: Unraid Community Apps template for LND.
 - `templates/lnbits.xml`: Unraid Community Apps template for LNbits.
+- `templates/matterjs-server.xml`: Unraid Community Apps template for Matter.js Server.
 - `templates/p-streamrec.xml`: Unraid Community Apps template for P-StreamRec.
 - `templates/phoenixd.xml`: Unraid Community Apps template for Phoenixd.
 - `templates/robosats.xml`: Unraid Community Apps template for RoboSats.

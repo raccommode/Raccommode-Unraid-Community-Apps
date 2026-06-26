@@ -1,0 +1,36 @@
+<Container version="2">
+  <Name>Matter.js Server</Name>
+  <Repository>ghcr.io/matter-js/matterjs-server:latest</Repository>
+  <Registry>https://github.com/matter-js/matterjs-server/pkgs/container/matterjs-server</Registry>
+  <Network>host</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <ExtraParams>--read-only</ExtraParams>
+  <WebUI>http://[IP]:[PORT:5580]/</WebUI>
+  <Overview>Open Home Foundation Matter.js Server is a Matter controller server with a Python Matter Server-compatible WebSocket API and a browser dashboard. It is used by Home Assistant Matter integrations and can also run as a standalone self-managed Matter server.</Overview>
+  <Support>https://github.com/matter-js/matterjs-server/issues</Support>
+  <Project>https://github.com/matter-js/matterjs-server</Project>
+  <ReadMe>https://github.com/matter-js/matterjs-server/blob/main/docs/docker.md</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/matterjs-server.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/matter-js/matterjs-server/main/docs/matter_logo.svg</Icon>
+  <Category>HomeAutomation:Network:Other Tools:Utilities</Category>
+  <Requires>This template uses host networking because Matter device discovery relies on mDNS and link-local traffic. The server binds to all interfaces by default, so protect access with your LAN, firewall, VPN, or reverse proxy, or set Listen Address to a specific IP. The upstream Docker image runs unprivileged and stores fabric data in /data; keep the Data path writable by UID/GID 1000, for example with chown -R 1000:1000 /mnt/user/appdata/matterjs-server if needed. The image is a drop-in replacement for Python Matter Server, but back up existing data before migration and do not run both servers against the same data directory. For BLE commissioning through the host Bluetooth stack, mount Host D-Bus and set Noble Bindings to dbus; raw HCI access usually requires elevated privileges and is not enabled by this template.</Requires>
+  <License>Apache-2.0</License>
+  <Config Name="Web UI Port" Target="5580" Default="5580" Mode="tcp" Description="Matter.js Server dashboard and WebSocket API port. With host networking, keep this aligned with the PORT variable. Container port: 5580." Type="Port" Display="always" Required="true" Mask="false">5580</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/matterjs-server" Mode="rw" Description="Persistent Matter fabric data, server storage, migration data, and optional logs. Back this path up before migrating from Python Matter Server." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/matterjs-server</Config>
+  <Config Name="Storage Path" Target="STORAGE_PATH" Default="/data" Mode="" Description="Storage path inside the container. Keep this pointed at the Data mount." Type="Variable" Display="always" Required="true" Mask="false">/data</Config>
+  <Config Name="Port" Target="PORT" Default="5580" Mode="" Description="Dashboard and WebSocket server port used inside host networking. Keep this aligned with Web UI Port." Type="Variable" Display="always" Required="true" Mask="false">5580</Config>
+  <Config Name="Log Level" Target="LOG_LEVEL" Default="info" Mode="" Description="Server logging level: critical, error, warning, info, debug, or verbose." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+  <Config Name="Listen Address" Target="LISTEN_ADDRESS" Default="" Mode="" Description="Optional IP address or interface name to bind the WebSocket server. Leave blank to bind all interfaces. Interface names can make the upstream health check fail." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Primary Interface" Target="PRIMARY_INTERFACE" Default="" Mode="" Description="Optional network interface used for Matter mDNS and link-local communication, for example eth0 or br0. Leave blank for auto-detect." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Log File" Target="LOG_FILE" Default="" Mode="" Description="Optional full log file path inside the container, for example /data/logs/matter-server.log. The path must include the filename." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Production Mode" Target="PRODUCTION_MODE" Default="false" Mode="" Description="Force dashboard production mode when running behind a reverse proxy. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable Dashboard" Target="DISABLE_DASHBOARD" Default="false" Mode="" Description="Disable the browser dashboard and keep only the WebSocket API. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Disable OTA" Target="DISABLE_OTA" Default="false" Mode="" Description="Disable Matter OTA update functionality. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Enable Test Net DCL" Target="ENABLE_TEST_NET_DCL" Default="false" Mode="" Description="Also use the test-net Matter Device Certificate Ledger for certificates and OTA updates. Use true or false." Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Node Options" Target="NODE_OPTIONS" Default="" Mode="" Description="Optional Node.js runtime options, for example --max-old-space-size=512 for larger deployments." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Host D-Bus" Target="/run/dbus" Default="" Mode="ro" Description="Optional host D-Bus mount used for Bluetooth commissioning with Noble Bindings set to dbus. Set the host path to /run/dbus only if the host has BlueZ running." Type="Path" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Noble Bindings" Target="NOBLE_BINDINGS" Default="" Mode="" Description="Optional Bluetooth backend. Set to dbus with the Host D-Bus mount for unprivileged host Bluetooth access, or leave blank if not using BLE commissioning." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Bluetooth Adapter" Target="BLUETOOTH_ADAPTER" Default="" Mode="" Description="Optional Bluetooth HCI adapter ID used with BLE commissioning, for example 0 for hci0." Type="Variable" Display="advanced" Required="false" Mask="false"/>
+</Container>

@@ -6,7 +6,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
-  <ExtraParams>--read-only</ExtraParams>
+  <ExtraParams>--read-only --user=0:0</ExtraParams>
   <WebUI>http://[IP]:[PORT:5580]/</WebUI>
   <Overview>Open Home Foundation Matter.js Server is a Matter controller server with a Python Matter Server-compatible WebSocket API and a browser dashboard. It is used by Home Assistant Matter integrations and can also run as a standalone self-managed Matter server.</Overview>
   <Support>https://github.com/matter-js/matterjs-server/issues</Support>
@@ -15,7 +15,7 @@
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/matterjs-server.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/matter-js/matterjs-server/main/docs/matter_logo.svg</Icon>
   <Category>HomeAutomation:Network:Other Tools:Utilities</Category>
-  <Requires>This template uses host networking because Matter device discovery relies on mDNS and link-local traffic. The server binds to all interfaces by default, so protect access with your LAN, firewall, VPN, or reverse proxy, or set Listen Address to a specific IP. The upstream Docker image runs unprivileged and stores fabric data in /data; keep the Data path writable by UID/GID 1000, for example with chown -R 1000:1000 /mnt/user/appdata/matterjs-server if needed. The image is a drop-in replacement for Python Matter Server, but back up existing data before migration and do not run both servers against the same data directory. For BLE commissioning through the host Bluetooth stack, mount Host D-Bus and set Noble Bindings to dbus; raw HCI access usually requires elevated privileges and is not enabled by this template.</Requires>
+  <Requires>This template uses host networking because Matter device discovery relies on mDNS and link-local traffic. The server binds to all interfaces by default, so protect access with your LAN, firewall, VPN, or reverse proxy, or set Listen Address to a specific IP. The upstream Docker image runs unprivileged by default, but this Unraid template uses --user=0:0 so it can create /data/config and other persistent folders in appdata paths created with restrictive ownership. The image is a drop-in replacement for Python Matter Server, but back up existing data before migration and do not run both servers against the same data directory. For BLE commissioning through the host Bluetooth stack, mount Host D-Bus and set Noble Bindings to dbus; raw HCI access usually requires elevated privileges and is not enabled by this template.</Requires>
   <License>Apache-2.0</License>
   <Config Name="Web UI Port" Target="5580" Default="5580" Mode="tcp" Description="Matter.js Server dashboard and WebSocket API port. With host networking, keep this aligned with the PORT variable. Container port: 5580." Type="Port" Display="always" Required="true" Mask="false">5580</Config>
   <Config Name="Data" Target="/data" Default="/mnt/user/appdata/matterjs-server" Mode="rw" Description="Persistent Matter fabric data, server storage, migration data, and optional logs. Back this path up before migrating from Python Matter Server." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/matterjs-server</Config>

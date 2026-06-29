@@ -1,5 +1,5 @@
 <Container version="2">
-  <Name>Matter.js Server</Name>
+  <Name>Matter.js-Server</Name>
   <Repository>ghcr.io/matter-js/matterjs-server:latest</Repository>
   <Registry>https://github.com/matter-js/matterjs-server/pkgs/container/matterjs-server</Registry>
   <Network>host</Network>

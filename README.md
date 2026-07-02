@@ -6,6 +6,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 
 - `ca_profile.xml`: repository overview and support metadata shown in Community Apps.
 - `icon.jpg`: repository icon referenced by `ca_profile.xml`.
+- `templates/appwrite.xml`: Unraid Community Apps template for the Appwrite Docker installer.
 - `templates/btcpayserver.xml`: Unraid Community Apps template for BTCPay Server.
 - `templates/lnd.xml`: Unraid Community Apps template for LND.
 - `templates/lnbits.xml`: Unraid Community Apps template for LNbits.

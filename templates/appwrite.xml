@@ -1,0 +1,24 @@
+<Container version="2">
+  <Name>Appwrite</Name>
+  <Repository>appwrite/appwrite:1.9.5</Repository>
+  <Registry>https://hub.docker.com/r/appwrite/appwrite</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <ExtraParams>--entrypoint=install</ExtraParams>
+  <WebUI>http://[IP]:[PORT:20080]</WebUI>
+  <Overview>Appwrite is an open-source backend platform for authentication, databases, storage, functions, messaging, realtime APIs, and app hosting. This template launches the official Appwrite Docker installer wizard, which creates the full self-hosted Appwrite Docker Compose stack.</Overview>
+  <Support>https://github.com/appwrite/appwrite/issues</Support>
+  <Project>https://github.com/appwrite/appwrite</Project>
+  <ReadMe>https://appwrite.io/docs/advanced/self-hosting/installation</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/appwrite.xml</TemplateURL>
+  <Icon>https://appwrite.io/assets/logomark/logo.png</Icon>
+  <Category>Network:Management Tools:Utilities</Category>
+  <Requires>This template runs the official Appwrite installer, not the final Appwrite runtime container. The current Appwrite self-hosted install creates a multi-container Docker Compose stack with Traefik, Appwrite services, Redis, MongoDB or MariaDB, worker containers, assistant/browser services, and the OpenRuntimes executor. The installer requires access to the host Docker socket and can create or modify containers, networks, and volumes on the Unraid host. Open the setup wizard on port 20080, complete installation, save and back up the generated secret key, then manage the generated stack from the Install Directory or Docker Compose. You can stop or remove this installer container after installation. Appwrite upstream minimum requirements are 2 CPU cores, 4 GB RAM, 2 GB swap, Docker, and Docker Compose v2.</Requires>
+  <License>BSD-3-Clause License</License>
+  <Screenshot>https://appwrite.io/assets/visuals/dashboard.png</Screenshot>
+  <Config Name="Install Wizard Port" Target="20080" Default="20080" Mode="tcp" Description="Appwrite web installer wizard port. This port is needed only while installing or reconfiguring Appwrite. Container port: 20080." Type="Port" Display="always" Required="true" Mask="false">20080</Config>
+  <Config Name="Install Directory" Target="/usr/src/code/appwrite" Default="/mnt/user/appdata/appwrite" Mode="rw" Description="Persistent Appwrite installer directory. The wizard writes the generated docker-compose.yml, .env, and related installation files here." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/appwrite</Config>
+  <Config Name="Docker Socket" Target="/var/run/docker.sock" Default="/var/run/docker.sock" Mode="rw" Description="Host Docker socket required by the official Appwrite installer so it can create and manage the generated Appwrite stack." Type="Path" Display="always" Required="true" Mask="false">/var/run/docker.sock</Config>
+</Container>

@@ -6,6 +6,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
+  <ExtraParams>--user=99:100</ExtraParams>
   <WebUI>http://[IP]:[PORT:3210]</WebUI>
   <Overview>EasyX Downloader is a private, self-hosted, plugin-first media acquisition manager. It organizes performers, sources, download queues, schedules, exact SHA-256 deduplication, and completed media while leaving website-specific discovery and downloading to trusted plugins.</Overview>
   <Support>https://github.com/raccommode/EasyX-Downloader/issues</Support>
@@ -14,7 +15,7 @@
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/easyx-downloader.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/icons/easyx-downloader.svg</Icon>
   <Category>Downloaders: MediaApp:Video Tools:Utilities</Category>
-  <Requires>EasyX does not include downloader plugins by default. Install only plugins you trust and use them only for content you are legally allowed to access and retain. EasyX has no user accounts in the current release; keep port 3210 on a private LAN or behind an authenticated reverse proxy and do not expose it directly to the internet. Plugin settings and API keys are stored in the Data path, so protect that directory and its backups. If Stash runs in another container, give both containers a shared Docker network or use a reachable LAN URL, mount the same Media host path into Stash, and configure EasyX with the matching path visible inside Stash.</Requires>
+  <Requires>This Unraid template runs EasyX as nobody:users (UID 99, GID 100) so it can write to standard Unraid appdata paths without running as root. EasyX does not include downloader plugins by default. Install only plugins you trust and use them only for content you are legally allowed to access and retain. EasyX has no user accounts in the current release; keep port 3210 on a private LAN or behind an authenticated reverse proxy and do not expose it directly to the internet. Plugin settings and API keys are stored in the Data path, so protect that directory and its backups. If Stash runs in another container, give both containers a shared Docker network or use a reachable LAN URL, mount the same Media host path into Stash, and configure EasyX with the matching path visible inside Stash.</Requires>
   <License>MIT License</License>
   <Config Name="Web UI Port" Target="3210" Default="3210" Mode="tcp" Description="EasyX web interface and API port. Keep this accessible only on a trusted LAN or through an authenticated reverse proxy. Container port: 3210." Type="Port" Display="always" Required="true" Mask="false">3210</Config>
   <Config Name="Data" Target="/data" Default="/mnt/user/appdata/easyx-downloader" Mode="rw" Description="Stores the SQLite database, application state, plugin configuration, API keys, and schedules. Back up and protect this path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/easyx-downloader</Config>

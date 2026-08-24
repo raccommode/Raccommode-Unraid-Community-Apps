@@ -6,6 +6,7 @@
   <MyIP/>
   <Shell>sh</Shell>
   <Privileged>false</Privileged>
+  <ExtraParams>--user=99:100</ExtraParams>
   <WebUI>http://[IP]:[PORT:3220]</WebUI>
   <Overview>EasyX Viewer is a private, self-hosted library for browsing videos and images. It recursively indexes an existing media folder without modifying it and provides search, filters, favorites, watch progress, history, HTTP Range streaming, and on-demand FFmpeg video thumbnails.</Overview>
   <Support>https://github.com/raccommode/EasyX-Viewer/issues</Support>
@@ -14,7 +15,7 @@
   <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/easyx-viewer.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/icons/easyx-viewer.svg</Icon>
   <Category>MediaApp:Video MediaApp:Photos Tools:Utilities</Category>
-  <Requires>EasyX Viewer is intended for media you are legally allowed to access and retain. The current release has no user accounts; keep port 3220 on a private LAN or behind an authenticated reverse proxy and do not expose it directly to the internet. The Media path is mounted read-only, so scans and playback do not modify your library. Thumbnails, favorites, watch progress, history, and the SQLite database are stored in the writable Data path. To view downloads from EasyX Downloader, point both templates at the same Media host path; Downloader mounts it read-write while Viewer mounts it read-only.</Requires>
+  <Requires>This Unraid template runs EasyX Viewer as nobody:users (UID 99, GID 100) so it can write to standard Unraid appdata paths without running as root. EasyX Viewer is intended for media you are legally allowed to access and retain. The current release has no user accounts; keep port 3220 on a private LAN or behind an authenticated reverse proxy and do not expose it directly to the internet. The Media path is mounted read-only, so scans and playback do not modify your library. Thumbnails, favorites, watch progress, history, and the SQLite database are stored in the writable Data path. To view downloads from EasyX Downloader, point both templates at the same Media host path; Downloader mounts it read-write while Viewer mounts it read-only.</Requires>
   <License>MIT License</License>
   <Config Name="Web UI Port" Target="3220" Default="3220" Mode="tcp" Description="EasyX Viewer web interface and API port. Keep this accessible only on a trusted LAN or through an authenticated reverse proxy. Container port: 3220." Type="Port" Display="always" Required="true" Mask="false">3220</Config>
   <Config Name="Data" Target="/data" Default="/mnt/user/appdata/easyx-viewer" Mode="rw" Description="Stores the SQLite database, generated thumbnails, favorites, watch progress, view counts, and history. Back up this path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/easyx-viewer</Config>

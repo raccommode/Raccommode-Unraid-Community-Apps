@@ -9,8 +9,6 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `icons/`: app-specific icons referenced by templates.
 - `templates/appwrite.xml`: Unraid Community Apps template for the Appwrite Docker installer.
 - `templates/btcpayserver.xml`: Unraid Community Apps template for BTCPay Server.
-- `templates/easyx-downloader.xml`: Unraid Community Apps template for EasyX Downloader.
-- `templates/easyx-viewer.xml`: Unraid Community Apps template for EasyX Viewer.
 - `templates/lnd.xml`: Unraid Community Apps template for LND.
 - `templates/lnbits.xml`: Unraid Community Apps template for LNbits.
 - `templates/matterjs-server.xml`: Unraid Community Apps template for Matter.js Server.

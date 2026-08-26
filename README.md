@@ -12,6 +12,7 @@ Community Applications metadata repository for Unraid templates and plugin wrapp
 - `templates/lnd.xml`: Unraid Community Apps template for LND.
 - `templates/lnbits.xml`: Unraid Community Apps template for LNbits.
 - `templates/matterjs-server.xml`: Unraid Community Apps template for Matter.js Server.
+- `templates/open-easyx.xml`: Unraid Community Apps template for OpenEasyX.
 - `templates/p-streamrec.xml`: Unraid Community Apps template for P-StreamRec.
 - `templates/phoenixd.xml`: Unraid Community Apps template for Phoenixd.
 - `templates/robosats.xml`: Unraid Community Apps template for RoboSats.

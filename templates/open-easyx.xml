@@ -1,0 +1,31 @@
+<Container version="2">
+  <Name>OpenEasyX</Name>
+  <Repository>ghcr.io/raccommode/open-easyx:latest</Repository>
+  <Registry>https://github.com/raccommode/OpenEasyX/pkgs/container/open-easyx</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <WebUI>http://[IP]:[PORT:3210]</WebUI>
+  <Overview>Open EasyX is one private, self-hosted application for discovering, downloading, organizing, browsing, and playing videos and images. It includes download queues, isolated partial downloads, library indexing, favorites, history, watch progress, live-cam playback, local subtitle transcription and translation, browser-assisted plugin login, and a built-in plugin store.</Overview>
+  <Support>https://github.com/raccommode/OpenEasyX/issues</Support>
+  <Project>https://github.com/raccommode/OpenEasyX</Project>
+  <ReadMe>https://raw.githubusercontent.com/raccommode/OpenEasyX/main/README.md</ReadMe>
+  <TemplateURL>https://raw.githubusercontent.com/raccommode/Raccommode-Unraid-Community-Apps/main/templates/open-easyx.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/raccommode/OpenEasyX/main/docs/icon.svg</Icon>
+  <Category>Downloaders: MediaApp:Video MediaApp:Photos Tools:Utilities</Category>
+  <Requires>Open EasyX is intended for content you are legally allowed to access and retain. Third-party plugins execute trusted server-side code, so review them before installation. The application is designed for a private LAN or an authenticated reverse proxy; do not expose port 3210 directly to the public internet. The Data path contains databases, sessions, plugin repositories, thumbnails, subtitles, and downloaded AI models, so protect it and include it in backups. Subtitle transcription and translation can download large models and require significant CPU, memory, and storage. This template uses Unraid's nobody:users identity through PUID 99 and PGID 100 while the container entrypoint prepares writable paths before dropping privileges.</Requires>
+  <License>MIT License</License>
+  <Config Name="Web UI Port" Target="3210" Default="3210" Mode="tcp" Description="Open EasyX web interface and API port. Keep this accessible only on a trusted LAN or through an authenticated reverse proxy. Container port: 3210." Type="Port" Display="always" Required="true" Mask="false">3210</Config>
+  <Config Name="Data" Target="/data" Default="/mnt/user/appdata/open-easyx" Mode="rw" Description="Stores databases, sessions, plugin repository checkouts, thumbnails, subtitles, logs, and downloaded AI models. Back up and protect this path." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/open-easyx</Config>
+  <Config Name="Media" Target="/media" Default="/mnt/user/OpenEasyX" Mode="rw" Description="Stores the completed media library and private .downloads staging directory used for active transfers." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/OpenEasyX</Config>
+  <Config Name="External Plugins" Target="/plugins" Default="/mnt/user/appdata/open-easyx/plugins" Mode="ro" Description="Optional legacy directory containing trusted external plugin folders. The built-in plugin store and added Git repositories are stored under Data instead." Type="Path" Display="advanced" Required="false" Mask="false">/mnt/user/appdata/open-easyx/plugins</Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="Host user ID used for files written to Data and Media. Unraid's nobody user is UID 99." Type="Variable" Display="always" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Host group ID used for files written to Data and Media. Unraid's users group is GID 100." Type="Variable" Display="always" Required="true" Mask="false">100</Config>
+  <Config Name="Scan Interval" Target="EASYX_SCAN_INTERVAL_MINUTES" Default="10" Mode="" Description="Minutes between automatic media-library scans. The minimum effective value is 1 minute." Type="Variable" Display="advanced" Required="true" Mask="false">10</Config>
+  <Config Name="Whisper Model" Target="EASYX_WHISPER_MODEL" Default="small" Mode="" Description="Whisper model used for local subtitle transcription. Larger models require more memory, storage, and processing time." Type="Variable" Display="advanced" Required="false" Mask="false">small</Config>
+  <Config Name="Translation Model" Target="EASYX_TRANSLATION_MODEL" Default="facebook/nllb-200-distilled-600M" Mode="" Description="Hugging Face model used for local subtitle translation." Type="Variable" Display="advanced" Required="false" Mask="false">facebook/nllb-200-distilled-600M</Config>
+  <Config Name="Subtitle Chunk Seconds" Target="EASYX_SUBTITLE_CHUNK_SECONDS" Default="600" Mode="" Description="Subtitle processing chunk length in seconds. Open EasyX constrains this value between 120 and 1800." Type="Variable" Display="advanced" Required="false" Mask="false">600</Config>
+  <Config Name="Log Level" Target="EASYX_LOG_LEVEL" Default="info" Mode="" Description="Application log level, for example fatal, error, warn, info, debug, trace, or silent." Type="Variable" Display="advanced" Required="false" Mask="false">info</Config>
+  <Config Name="Timezone" Target="TZ" Default="America/Toronto" Mode="" Description="Timezone used by the container, for example America/Toronto." Type="Variable" Display="advanced" Required="false" Mask="false">America/Toronto</Config>
+</Container>
